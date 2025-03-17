@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Available Courses</h1>
+        <input type="text" id="search" placeholder="Search courses...">
+    </header>
+    
+    <div class="course-container">
+        <% courses.forEach(course => { %>
+            <div class="course-card">
+                <h2><%= course.name %></h2>
+                <p><%= course.description %></p>
+                <a href="/courses/<%= course.id %>">View Details</a>
+            </div>
+        <% }) %>
+    </div>
+
+    <script>
+        document.getElementById("search").addEventListener("input", function() {
+            let query = this.value.toLowerCase();
+            document.querySelectorAll(".course-card").forEach(card => {
+                let name = card.querySelector("h2").innerText.toLowerCase();
+                card.style.display = name.includes(query) ? "block" : "none";
+            });
+        });
+    </script>
+</body>
+</html>
